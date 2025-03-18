@@ -2,8 +2,8 @@ namespace Mobiiliapp;
 
 public partial class StartPage : ContentPage
 {
-	public List<ContentPage> lehed = new List<ContentPage>() { new TextPage(), new FigurePage() };
-	public List<string> tekstid = new List<string> { "Tee lahti tekstPage", "Tee lahti FigutePage" };
+	public List<ContentPage> lehed = new List<ContentPage>() { new TextPage(), new FigurePage(), new Valgusfoor()};
+	public List<string> tekstid = new List<string> { "Tee lahti tekstPage", "Tee lahti FigutePage", "Tee lahti Valgusfoor"};
 	ScrollView sv;
 	VerticalStackLayout vsl;
 	public StartPage()
@@ -20,7 +20,7 @@ public partial class StartPage : ContentPage
 				FontSize= 40,
 				BorderWidth=10,
 				ZIndex=i,
-				FontFamily="Legrand Regular 400"
+				FontFamily="Times New Roman"
 			};
 			vsl.Add(nupp);
 			nupp.Clicked += Lehte_avamine;
