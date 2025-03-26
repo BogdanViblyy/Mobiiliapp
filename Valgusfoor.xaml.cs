@@ -1,4 +1,4 @@
-namespace Mobiiliapp;
+﻿namespace Mobiiliapp;
 
 public partial class Valgusfoor : ContentPage
 {
@@ -13,6 +13,8 @@ public partial class Valgusfoor : ContentPage
 
     private async void OnClickedBtn3(object sender, EventArgs e)
     {
+        if (nightMode) return;
+
         i = true;
         while (i)
         {
@@ -28,21 +30,16 @@ public partial class Valgusfoor : ContentPage
         }
     }
 
-    private async void OnClickedBtn4(object sender, EventArgs e)
+    private void OnClickedBtn4(object sender, EventArgs e)
     {
         i = false;
-        red.BackgroundColor = Color.FromRgb(128, 128, 128);
-        green.BackgroundColor = Color.FromRgb(128, 128, 128);
-        yellow.BackgroundColor = Color.FromRgb(128, 128, 128);
+        nightMode = false; 
+        ResetLights();
     }
 
-    private async void OnClickedBtn6(object sender, EventArgs e)
+    private void OnClickedBtn6(object sender, EventArgs e)
     {
-        if (nightMode)
-        {
-            nightMode = false;
-            return;
-        }
+        if (nightMode) return; 
 
         if (g == 0)
         {
@@ -67,18 +64,33 @@ public partial class Valgusfoor : ContentPage
         }
     }
 
-    private async void yellowTapped(object sender, TappedEventArgs e)
+    private async void OnClickedNightMode(object sender, EventArgs e)
     {
         nightMode = !nightMode;
 
-        while (nightMode)
+        if (nightMode)
         {
-            yellow.BackgroundColor = Color.FromRgb(255, 255, 0);
-            await Task.Delay(500);
-            yellow.BackgroundColor = Color.FromRgb(128, 128, 128);
-            await Task.Delay(500);
-        }
+            i = false; 
+            ResetLights(); 
 
+            while (nightMode)
+            {
+                yellow.BackgroundColor = Color.FromRgb(255, 255, 0);
+                await Task.Delay(500);
+                yellow.BackgroundColor = Color.FromRgb(128, 128, 128);
+                await Task.Delay(500);
+            }
+        }
+        else
+        {
+            ResetLights();
+        }
+    }
+
+    private void ResetLights()
+    {
+        red.BackgroundColor = Color.FromRgb(128, 128, 128);
+        green.BackgroundColor = Color.FromRgb(128, 128, 128);
         yellow.BackgroundColor = Color.FromRgb(128, 128, 128);
     }
 }
